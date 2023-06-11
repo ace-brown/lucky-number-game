@@ -50,6 +50,12 @@ closeModalBtn.addEventListener("click", closeModal);
 
 overLay.addEventListener("click", closeModal);
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
+});
+
 // game logic: lose, win, decrease score func -----------------------------------
 button.addEventListener("click", () => {
   const guess = Number(guessString.value);
