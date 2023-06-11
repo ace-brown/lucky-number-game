@@ -8,6 +8,11 @@ const playAgain = document.querySelector(".again");
 const number = document.querySelector(".number");
 const body = document.querySelector(".body");
 const highscore = document.querySelector(".highscore");
+const openModalBtn = document.querySelector("#modal-btn ");
+const modal = document.querySelector(".modal");
+const hidden = document.querySelector(".hidden");
+const closeModalBtn = document.querySelector(".close-modal");
+const overLay = document.querySelector(".overlay");
 
 const jsConfetti = new JSConfetti();
 
@@ -27,6 +32,23 @@ function dispalyMessage(msg) {
 function backgroundClr(color) {
   body.style.backgroundColor = color;
 }
+
+// modal ------------------------------------------------------------------------
+function openModal() {
+  modal.classList.remove("hidden");
+  overLay.classList.remove("hidden");
+}
+
+function closeModal() {
+  modal.classList.add("hidden");
+  overLay.classList.add("hidden");
+}
+
+openModalBtn.addEventListener("click", openModal);
+
+closeModalBtn.addEventListener("click", closeModal);
+
+overLay.addEventListener("click", closeModal);
 
 // game logic: lose, win, decrease score func -----------------------------------
 button.addEventListener("click", () => {

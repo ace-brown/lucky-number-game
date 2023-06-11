@@ -23,14 +23,15 @@ body {
 }
 
 /* LAYOUT */
+
+/* header */
 header {
   position: relative;
   height: 35vh;
   border-bottom: 7px solid var(--white-);
 }
 
-header h1,
-p {
+.font-white {
   color: var(--white-);
 }
 
@@ -52,6 +53,76 @@ main {
 .right {
   width: 52rem;
   font-size: 2rem;
+}
+
+/* modal */
+
+.modal-btn {
+  font-size: 1.4rem;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+.btn {
+  border: none;
+  background-color: var(--white-);
+  color: var(--font-clr);
+  font-size: 2rem;
+  font-family: inherit;
+  padding: 2rem 3rem;
+  cursor: pointer;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.modal h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  margin-top: 15rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  color: var(--font-clr);
+  background-color: white;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.modal p {
+  font-size: 1.8rem;
+  font-family: sans-serif;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 5;
 }
 
 /* ELEMENTS STYLE */
@@ -78,13 +149,6 @@ h1 {
   transform: translate(-50%, 50%);
 }
 
-.between {
-  font-size: 1.4rem;
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-}
-
 .again {
   position: absolute;
   top: 2rem;
@@ -102,16 +166,6 @@ h1 {
   text-align: center;
   display: block;
   margin-bottom: 3rem;
-}
-
-.btn {
-  border: none;
-  background-color: var(--white-);
-  color: var(--font-clr);
-  font-size: 2rem;
-  font-family: inherit;
-  padding: 2rem 3rem;
-  cursor: pointer;
 }
 
 .btn:hover {
