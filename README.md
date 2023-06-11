@@ -6,4 +6,4 @@ In this simple JavaScript game you have 20 chances to guess a lucky number. If y
 
 Just download the codes or clone the repo and then run the index.html file by double clicking on that and it will be showed up in your browser.
 
-![game picture]('./game.png')
+![game picture](./game.png)
