@@ -1,52 +1,74 @@
 "use strict";
-// querrySelectors
+// querrySelectors ---------------------------------------------------------------
 const guessString = document.querySelector(".guess");
 const button = document.querySelector(".check");
 const message = document.querySelector(".message");
 const currentScore = document.querySelector(".score");
+const playAgain = document.querySelector(".again");
+const number = document.querySelector(".number");
+const body = document.querySelector(".body");
+const highscore = document.querySelector(".highscore");
 
 const jsConfetti = new JSConfetti();
 
-// variables
-const secretNumber = Math.trunc(Math.random() * 10) + 1;
-document.querySelector(".number").textContent = secretNumber;
+// variables --------------------------------------------------------------------
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-// states
-let reducedScore = 10;
+// states -----------------------------------------------------------------------
+let reducingScore = 20;
+let topScore = 0;
 
-// functions
+// dispaly message func ---------------------------------------------------------
+function dispalyMessage(msg) {
+  return (message.textContent = msg);
+}
+
+// background color changer func ------------------------------------------------
+function backgroundClr(color) {
+  body.style.backgroundColor = color;
+}
+
+// game logic: lose, win, decrease score func -----------------------------------
 button.addEventListener("click", () => {
   const guess = Number(guessString.value);
   if (!guess) {
-    message.textContent = "You didn't enter any number ☹️";
+    dispalyMessage("You didn't enter any number ☹️");
   } else if (guess === secretNumber) {
-    document.body.classList.add("won");
+    backgroundClr("#37db63");
     jsConfetti
       .addConfetti({
         emojis: ["🌈", "⚡️", "💥", "✨", "💫", "🌸"],
       })
       .then(() => jsConfetti.addConfetti());
-    message.textContent = "Correct number 😀";
-  } else {
-    if (reducedScore > 1) {
-      if (guess > secretNumber) {
-        message.textContent = "Too high ☹️";
-        scoreReducer();
-      } else if (guess < secretNumber) {
-        message.textContent = "Too low ☹️";
-        scoreReducer();
-      }
+    dispalyMessage("Hurray! you won the game. 😀");
+    number.textContent = secretNumber;
+    const topCurrScore = Number(currentScore.textContent);
+    if (topScore < topCurrScore) {
+      topScore = topCurrScore;
+      highscore.textContent = topScore;
+    }
+  } else if (guess !== secretNumber) {
+    if (reducingScore > 1) {
+      message.textContent = guess > secretNumber ? "Too high 📈" : "Too low 📉";
+      reducingScore--;
+      return (currentScore.textContent = reducingScore);
     } else {
-      message.textContent = "Game over ☹️. Please start the game again";
+      dispalyMessage("Game over ☹️. Please start the game again");
       currentScore.textContent = 0;
-      document.body.classList.add("lost");
+      backgroundClr("red");
     }
   }
 
   console.log(currentScore.textContent);
 });
 
-function scoreReducer() {
-  reducedScore--;
-  return (currentScore.textContent = reducedScore);
-}
+// play again btn func ---------------------------------------------------------
+playAgain.addEventListener("click", () => {
+  dispalyMessage("Let's play again 😀");
+  backgroundClr("#012d33");
+  reducingScore = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  currentScore.textContent = 20;
+  number.textContent = "?";
+  guessString.value = "";
+});
